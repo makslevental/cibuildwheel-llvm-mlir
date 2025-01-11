@@ -135,8 +135,8 @@ set(LLVM_FORCE_ENABLE_STATS ON CACHE BOOL "")
 
 set(LLVM_BUILD_LLVM_DYLIB ON CACHE BOOL "")
 # All the tools will use libllvm shared library
-# (but doesn't work on windows)
-if (NOT WIN32)
+# (but doesn't work on windows or aarch64)
+if (NOT WIN32 AND NOT ARCH STREQUAL "AArch64")
   set(LLVM_LINK_LLVM_DYLIB ON CACHE BOOL "")
   set(MLIR_LINK_MLIR_DYLIB ON CACHE BOOL "")
 endif()
