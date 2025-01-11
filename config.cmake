@@ -133,9 +133,13 @@ set(LLVM_ENABLE_ZLIB OFF CACHE BOOL "")
 set(LLVM_ENABLE_ZSTD OFF CACHE BOOL "")
 set(LLVM_FORCE_ENABLE_STATS ON CACHE BOOL "")
 
-# diverges from iree because of weird linking problems in mlir_float16 utils and etc
-set(LLVM_BUILD_LLVM_DYLIB OFF CACHE BOOL "")
-set(LLVM_LINK_LLVM_DYLIB OFF CACHE BOOL "")
+set(LLVM_BUILD_LLVM_DYLIB ON CACHE BOOL "")
+# All the tools will use libllvm shared library
+# (but doesn't work on windows or aarch64)
+if(NOT WIN32 AND NOT ARCH STREQUAL "AArch64")
+  set(LLVM_LINK_LLVM_DYLIB ON CACHE BOOL "")
+  set(MLIR_LINK_MLIR_DYLIB ON CACHE BOOL "")
+endif()
 
 set(LLVM_ENABLE_UNWIND_TABLES OFF CACHE BOOL "")
 set(CLANG_ENABLE_ARCMT OFF CACHE BOOL "")
