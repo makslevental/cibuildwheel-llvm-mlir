@@ -24,9 +24,9 @@ else
 fi
 
 if [ x"$CIBW_ARCHS" == x"arm64" ] || [ x"$CIBW_ARCHS" == x"aarch64" ]; then
-  if [ x"$MATRIX_OS" == x"macos-13" ] && [ x"$CIBW_ARCHS" == x"arm64" ]; then
+  if [ x"$MATRIX_OS" == x"macos-13" ] || [ x"$MATRIX_OS" == x"macos-13" ]; then
     PLAT=macosx_12_0_arm64
-  elif [ x"$MATRIX_OS" == x"ubuntu-20.04" ] && [ x"$CIBW_ARCHS" == x"aarch64" ]; then
+  elif [ x"$MATRIX_OS" == x"ubuntu-20.04" ]; then
     PLAT=linux_aarch64
   fi
   pip install mlir$MLIR_WHEEL_VERSION --platform $PLAT --only-binary=:all: --target $SITE_PACKAGES --no-deps --force -U
